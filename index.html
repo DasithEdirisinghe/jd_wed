@@ -14,7 +14,7 @@
     <p id="status"></p>
 
 <script>
-const UPLOAD_URL = "https://script.google.com/macros/s/AKfycbyGOvz5Wu-NENnnGqVDcsL2vaRuYUIWZg0cLuNSBfBKfB5FDSHne-YbYMCeY-wTVpRI/exec";
+const UPLOAD_URL = "https://script.google.com/macros/s/AKfycbxoNUHKcIyt73e4w0vjR3jYfck8RZNBZfMxNLq2Cibnd5YU7LL-vgCmqe0vLMfenyBJ/exec";
 
 async function upload() {
   const files = document.getElementById("fileInput").files;
@@ -33,7 +33,9 @@ async function upload() {
         const base64 = e.target.result.split(",")[1];
 
         const res = await fetch(
-          UPLOAD_URL + "?filename=" + encodeURIComponent(file.name),
+          UPLOAD_URL +
+            "?filename=" + encodeURIComponent(file.name) +
+            "&mimetype=" + encodeURIComponent(file.type),
           {
             method: "POST",
             headers: {
