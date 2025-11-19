@@ -26,26 +26,33 @@ async function upload() {
   document.getElementById("status").innerText = "Uploading...";
 
   for (let file of files) {
-    const reader = new FileReader();
-    
-    reader.onload = async function(e) {
-      const base64 = e.target.result.split(",")[1];
+    await new Promise((resolve) => {
+      const reader = new FileReader();
 
-      const form = new FormData();
-      form.append("filename", file.name);
+      reader.onload = async function(e) {
+        const base64 = e.target.result.split(",")[1];
 
-      const res = await fetch(UPLOAD_URL, {
-        method: "POST",
-        body: base64
-      });
+        const res = await fetch(
+          UPLOAD_URL + "?filename=" + encodeURIComponent(file.name),
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "text/plain"
+            },
+            body: base64
+          }
+        );
 
-      console.log(await res.text());
-    };
+        console.log(await res.text());
+        resolve();
+      };
 
-    reader.readAsDataURL(file);
+      reader.readAsDataURL(file);
+    });
   }
 
-  document.getElementById("status").innerText = "Uploaded Successfully 🎉";
+  document.getElementById("status").innerText =
+    "Uploaded Successfully 🎉 Thank you!";
 }
 </script>
   </body>
