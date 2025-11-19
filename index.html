@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Wedding Upload ❤️</title>
+  </head>
+  <body style="text-align:center; font-family:Arial; margin-top:40px;">
+    <h2>Upload Wedding Photos & Videos</h2>
+
+    <input type="file" id="fileInput" multiple accept="image/*,video/*">
+
+    <button onclick="upload()">Upload</button>
+
+    <p id="status"></p>
+
+<script>
+const UPLOAD_URL = "https://script.google.com/macros/s/AKfycbwzMhxQ73G5pSQTDNeqbMKf82NAhULyT1pS7QJIeATbkvU6xXmgemeOlGRCCq_KnQ6_/exec";
+
+async function upload() {
+  const files = document.getElementById("fileInput").files;
+  if (files.length === 0) {
+    alert("Select files first!");
+    return;
+  }
+
+  document.getElementById("status").innerText = "Uploading...";
+
+  for (let file of files) {
+    const reader = new FileReader();
+    
+    reader.onload = async function(e) {
+      const base64 = e.target.result.split(",")[1];
+
+      const form = new FormData();
+      form.append("filename", file.name);
+
+      const res = await fetch(UPLOAD_URL, {
+        method: "POST",
+        body: base64
+      });
+
+      console.log(await res.text());
+    };
+
+    reader.readAsDataURL(file);
+  }
+
+  document.getElementById("status").innerText = "Uploaded Successfully 🎉";
+}
+</script>
+  </body>
+</html>
