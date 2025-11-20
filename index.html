@@ -1,165 +1,188 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <title>Share Your Memories ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<title>The Love Gazette – Upload Memories</title>
 
-  <!-- Matching fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
 
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Cormorant Garamond', serif;
-      background: #f2f0eb;
-      color: #2c2c2c;
-      text-align: center;
-      background-image: url('https://i.imgur.com/fBGf6dn.png'); /* subtle paper texture */
-      background-size: cover;
-      background-attachment: fixed;
-    }
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    background: #ece6dd;
+    text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+    color: #1b1a18;
+  }
 
-    /* Container to ensure proper mobile spacing */
-    .container {
-      padding: 16px;
-      max-width: 550px;
-      margin: auto;
-    }
+  .wrapper {
+    max-width: 480px;
+    margin: auto;
+    padding: 16px;
+  }
 
-    /* Wedding photo */
-    .photo-header {
-      width: 100%;
-      border-radius: 12px;
-      max-width: 500px;
-      height: auto;
-      margin: 20px auto;
-      box-shadow: 0 0 12px rgba(0,0,0,0.25);
-    }
+  .header-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-top: 10px;
+  }
 
-    /* Titles */
-    .card-title {
-      font-size: 7vw;
-      max-font-size: 36px;
-      font-weight: 700;
-      margin: 10px 0 5px;
-      font-family: 'Playfair Display', serif;
-    }
+  .divider {
+    border-top: 1px solid #444;
+    margin: 6px 0 10px;
+  }
 
-    .subtitle {
-      font-size: 4vw;
-      max-font-size: 20px;
-      margin-bottom: 18px;
-      padding: 0 10px;
-      line-height: 1.3;
-      letter-spacing: 0.8px;
-    }
+  .subline {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    margin-bottom: 16px;
+  }
 
-    /* Upload card */
-    .upload-box {
-      border: 1px solid #333;
-      padding: 20px;
-      border-radius: 12px;
-      background: rgba(255,255,255,0.9);
-      box-shadow: 0 0 10px rgba(0,0,0,0.08);
-      margin-top: 20px;
-    }
+  .main-title {
+    font-family: 'Playfair Display', serif;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 16px;
+    margin-bottom: 16px;
+  }
 
-    /* Touch-friendly input */
-    input[type="file"] {
-      margin: 15px 0;
-      width: 80%;
-      font-size: 16px;
-      border: none;
-    }
+  /* Portrait */
+  .portrait {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  }
 
-    /* Large mobile-friendly button */
-    button {
-      width: 80%;
-      padding: 14px;
-      font-size: 18px;
-      border: 1px solid #333;
-      border-radius: 8px;
-      background: #eee;
-      font-family: 'Cormorant Garamond', serif;
-      margin-top: 10px;
-    }
+  /* Upload Panel */
+  .upload-box {
+    background: #f9f6f1;
+    border: 1px solid #444;
+    padding: 18px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+  }
 
-    button:active {
-      background: #ddd;
-    }
+  .upload-box p {
+    margin: 0 0 12px;
+    font-size: 15px;
+  }
 
-    #status {
-      margin-top: 12px;
-      font-size: 17px;
-    }
+  input[type="file"] {
+    width: 100%;
+    margin: 12px 0;
+    font-size: 14px;
+  }
 
-    /* Progress bar improvements */
-    .progress-container {
-      width: 85%;
-      background-color: #dcdcdc;
-      border-radius: 10px;
-      margin: 20px auto;
-      overflow: hidden;
-      display: none;
-      height: 14px;
-    }
+  button {
+    width: 100%;
+    padding: 14px;
+    font-size: 15px;
+    border-radius: 999px;
+    border: 1px solid #444;
+    background: #e6ded4;
+    font-family: 'Cormorant Garamond', serif;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+  }
 
-    .progress-bar {
-      height: 100%;
-      width: 0%;
-      background: #333;
-      transition: width 0.25s ease-out;
-    }
+  button:disabled {
+    opacity: 0.6;
+  }
 
-    /* Prevent layout issues on iPhones */
-    img, button, input {
-      -webkit-tap-highlight-color: transparent;
-    }
+  /* Progress Bar */
+  .progress-container {
+    width: 100%;
+    height: 8px;
+    background: #d0c8be;
+    border-radius: 999px;
+    margin-top: 12px;
+    overflow: hidden;
+    display: none;
+  }
 
-  </style>
+  .progress-bar {
+    height: 100%;
+    width: 0%;
+    background: #444;
+    transition: width 0.3s ease;
+  }
+
+  .names {
+    margin-top: 20px;
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+</style>
 </head>
 
 <body>
 
-<div class="container">
+<div class="wrapper">
 
-  <!-- Header wedding photo -->
-  <img src="JD.JPEG" class="photo-header">
+  <!-- Header -->
+  <div class="header-title">The Love Gazette</div>
+  <div class="divider"></div>
 
-  <h1 class="card-title">Share Your Memories</h1>
-  <p class="subtitle">We’d love to see the beautiful moments you captured.</p>
+  <div class="subline">
+    <span>Paradise Inn Bolgoda</span>
+    <span>01 Dec 2025</span>
+  </div>
 
+  <div class="main-title">With Gratitude</div>
+
+  <!-- Portrait -->
+  <img src="JD.JPEG" class="portrait" alt="Couple Portrait">
+
+  <!-- Upload Panel -->
   <div class="upload-box">
-    <input type="file" id="fileInput" multiple accept="image/*,video/*">
-    <br>
-    <button onclick="upload()">Upload</button>
+    <p>Share the beautiful moments you captured ❤️</p>
 
-    <div class="progress-container">
+    <input type="file" id="fileInput" multiple accept="image/*,video/*">
+    <button id="uploadBtn" onclick="upload()">Upload</button>
+
+    <div class="progress-container" id="progressContainer">
       <div class="progress-bar" id="progressBar"></div>
     </div>
 
-    <p id="status"></p>
+    <div id="status" style="margin-top:10px; font-size:14px;"></div>
   </div>
+
+  <div class="names">Janani & Dasith</div>
 
 </div>
 
 <script>
-const UPLOAD_URL = "https://script.google.com/macros/s/AKfycbxoNUHKcIyt73e4w0vjR3jYfck8RZNBZfMxNLq2Cibnd5YU7LL-vgCmqe0vLMfenyBJ/exec";
+const UPLOAD_URL = "YOUR_APPS_SCRIPT_URL_HERE";
 
 async function upload() {
-  const files = document.getElementById("fileInput").files;
-  const total = files.length;
-  if (total === 0) {
-    alert("Please select photos or videos to upload.");
+  const fileInput = document.getElementById("fileInput");
+  const files = fileInput.files;
+  const uploadBtn = document.getElementById("uploadBtn");
+  const progressContainer = document.getElementById("progressContainer");
+  const progressBar = document.getElementById("progressBar");
+  const status = document.getElementById("status");
+
+  if (files.length === 0) {
+    alert("Please select photos or videos.");
     return;
   }
 
-  document.querySelector('.progress-container').style.display = "block";
-  const progressBar = document.getElementById("progressBar");
+  uploadBtn.disabled = true;
+  fileInput.disabled = true;
+
+  progressContainer.style.display = "block";
+  progressBar.style.width = "0%";
+  status.textContent = "Uploading...";
 
   let uploaded = 0;
-  document.getElementById("status").innerText = "Uploading...";
 
   for (let file of files) {
     await new Promise((resolve) => {
@@ -180,8 +203,9 @@ async function upload() {
         );
 
         uploaded++;
-        let percent = Math.round((uploaded / total) * 100);
-        progressBar.style.width = percent + "%";
+        progressBar.style.width =
+          Math.round((uploaded / files.length) * 100) + "%";
+        status.textContent = `Uploaded ${uploaded} of ${files.length}`;
 
         resolve();
       };
@@ -190,8 +214,11 @@ async function upload() {
     });
   }
 
-  document.getElementById("status").innerText =
-    "Thank you! Your memories have been uploaded ❤️";
+  // Reset inputs
+  status.textContent = "Upload completed ❤️ Thank you!";
+  fileInput.value = "";
+  uploadBtn.disabled = false;
+  fileInput.disabled = false;
 }
 </script>
 
