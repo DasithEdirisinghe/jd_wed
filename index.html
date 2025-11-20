@@ -1,113 +1,164 @@
 <!DOCTYPE html>
 <html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>Share Your Memories ❤️</title>
 
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Wedding Upload ❤️</title>
-  </head>
+  <!-- Matching fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
 
-   <body style="
-    text-align:center;
-    font-family:Arial;
-    margin-top:40px;
-    background-image: url('images/bg1.jpg');  
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 100vh;
-  ">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Cormorant Garamond', serif;
+      background: #f2f0eb;
+      color: #2c2c2c;
+      text-align: center;
+      background-image: url('https://i.imgur.com/fBGf6dn.png'); /* subtle paper texture */
+      background-size: cover;
+      background-attachment: fixed;
+    }
 
-   <!-- Background wrapper If you want a blured backgrund -->
-  <!-- <div style="
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    background-image: url('images/bg1.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    filter: blur(3px);   /* Blur effect */
-    z-index:-1;          /* Behind content */
-  "></div> -->
-    
-<div style=" 
-    position: absolute;
-    left: 60px;                 
-    top: 50%;                   
-    transform: translateY(-50%);
-    background: rgba(255, 255, 255, 0.85);
-    padding: 35px 45px;
-    border-radius: 16px;
-    width: 570px;               /* Increased width */
-    text-align: left;           
-    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-    backdrop-filter: blur(8px);
-">
-  <h2 style="margin-top:0; font-size:28px; color:#333;">
-    Share Your Captured Moments With Us ❤️
-  </h2> 
+    /* Container to ensure proper mobile spacing */
+    .container {
+      padding: 16px;
+      max-width: 550px;
+      margin: auto;
+    }
 
-  <p class="subtitle" style="
-    font-family: 'Georgia', 'Times New Roman', serif;
-    font-size: 18px;
-    line-height: 1.6;
-    color: #555555;
-    font-weight: 400;
-    margin-top: 12px;
-">  
-    Please upload the photos and videos you captured during our wedding day. Every moment matters!</p>
+    /* Wedding photo */
+    .photo-header {
+      width: 100%;
+      border-radius: 12px;
+      max-width: 500px;
+      height: auto;
+      margin: 20px auto;
+      box-shadow: 0 0 12px rgba(0,0,0,0.25);
+    }
 
-  <label style="font-size:14px; color:#444; font-weight:bold;">
-    <!-- Select Photos or Videos: -->
-     Choose Memories to Upload
-  </label><br>
+    /* Titles */
+    .card-title {
+      font-size: 7vw;
+      max-font-size: 36px;
+      font-weight: 700;
+      margin: 10px 0 5px;
+      font-family: 'Playfair Display', serif;
+    }
 
-  <input 
-      type="file" 
-      id="fileInput" 
-      multiple 
-      accept="image/*,video/*"
-      style="margin:12px 0; width:100%;"
-  >
+    .subtitle {
+      font-size: 4vw;
+      max-font-size: 20px;
+      margin-bottom: 18px;
+      padding: 0 10px;
+      line-height: 1.3;
+      letter-spacing: 0.8px;
+    }
 
-  <button 
-      onclick="upload()"
-      style="
-        background: linear-gradient(135deg, #4FC3F7, #81C784);  /* Light Blue + Green */
-        color:white;
-        border:none;
-        padding:14px 20px;
-        font-size:17px;
-        border-radius:10px;
-        cursor:pointer;
-        width:100%;
-        transition:0.2s;
-        font-weight:bold;
-      "
-      onmouseover="this.style.opacity='0.88'"
-      onmouseout="this.style.opacity='1'"
-  >
-    Upload
-  </button>
+    /* Upload card */
+    .upload-box {
+      border: 1px solid #333;
+      padding: 20px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.9);
+      box-shadow: 0 0 10px rgba(0,0,0,0.08);
+      margin-top: 20px;
+    }
 
-  <p id="status" style="margin-top:14px; font-size:15px; color:#222;"></p>
+    /* Touch-friendly input */
+    input[type="file"] {
+      margin: 15px 0;
+      width: 80%;
+      font-size: 16px;
+      border: none;
+    }
+
+    /* Large mobile-friendly button */
+    button {
+      width: 80%;
+      padding: 14px;
+      font-size: 18px;
+      border: 1px solid #333;
+      border-radius: 8px;
+      background: #eee;
+      font-family: 'Cormorant Garamond', serif;
+      margin-top: 10px;
+    }
+
+    button:active {
+      background: #ddd;
+    }
+
+    #status {
+      margin-top: 12px;
+      font-size: 17px;
+    }
+
+    /* Progress bar improvements */
+    .progress-container {
+      width: 85%;
+      background-color: #dcdcdc;
+      border-radius: 10px;
+      margin: 20px auto;
+      overflow: hidden;
+      display: none;
+      height: 14px;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: #333;
+      transition: width 0.25s ease-out;
+    }
+
+    /* Prevent layout issues on iPhones */
+    img, button, input {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- Header wedding photo -->
+  <img src="JD.JPEG" class="photo-header">
+
+  <h1 class="card-title">Share Your Memories</h1>
+  <p class="subtitle">We’d love to see the beautiful moments you captured.</p>
+
+  <div class="upload-box">
+    <input type="file" id="fileInput" multiple accept="image/*,video/*">
+    <br>
+    <button onclick="upload()">Upload</button>
+
+    <div class="progress-container">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <p id="status"></p>
+  </div>
+
 </div>
 
-
-
 <script>
-
 const UPLOAD_URL = "https://script.google.com/macros/s/AKfycbxoNUHKcIyt73e4w0vjR3jYfck8RZNBZfMxNLq2Cibnd5YU7LL-vgCmqe0vLMfenyBJ/exec";
 
 async function upload() {
   const files = document.getElementById("fileInput").files;
-  if (files.length === 0) {
-    alert("Select files first!");
+  const total = files.length;
+  if (total === 0) {
+    alert("Please select photos or videos to upload.");
     return;
   }
 
+  document.querySelector('.progress-container').style.display = "block";
+  const progressBar = document.getElementById("progressBar");
+
+  let uploaded = 0;
   document.getElementById("status").innerText = "Uploading...";
 
   for (let file of files) {
@@ -117,20 +168,21 @@ async function upload() {
       reader.onload = async function(e) {
         const base64 = e.target.result.split(",")[1];
 
-        const res = await fetch(
+        await fetch(
           UPLOAD_URL +
-            "?filename=" + encodeURIComponent(file.name) +
-            "&mimetype=" + encodeURIComponent(file.type),
+          "?filename=" + encodeURIComponent(file.name) +
+          "&mimetype=" + encodeURIComponent(file.type),
           {
             method: "POST",
-            headers: {
-              "Content-Type": "text/plain"
-            },
+            headers: { "Content-Type": "text/plain" },
             body: base64
           }
         );
 
-        console.log(await res.text());
+        uploaded++;
+        let percent = Math.round((uploaded / total) * 100);
+        progressBar.style.width = percent + "%";
+
         resolve();
       };
 
@@ -139,11 +191,9 @@ async function upload() {
   }
 
   document.getElementById("status").innerText =
-    //"Uploaded Successfully 📸💌 Thanks for sharing💕!"
-    "Hooray 🥂! Your moments are now with us 💕🌸"
-    ;
+    "Thank you! Your memories have been uploaded ❤️";
 }
 </script>
 
-  </body>
+</body>
 </html>
